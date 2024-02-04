@@ -1,11 +1,11 @@
 import React from 'react';
-import logoImg from '../../../public/favicon.png';
+import logoImg from '../../assets/images/logo.png';
 
 const Logo = () => {
   return (
-    <div>
-      <img src={logoImg} alt='logo' />
-      <p>Alpaago Task</p>
+    <div className='flex justify-center items-center'>
+      <img src={logoImg} alt='logo' className='w-[35px] h-[35px]  gap-[20px]' />
+      <p className='text-lg font-medium'>Alpaago Task</p>
     </div>
   );
 };
