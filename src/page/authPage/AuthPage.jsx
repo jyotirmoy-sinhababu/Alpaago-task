@@ -1,7 +1,5 @@
 import Auth from '../../components/auth/Auth';
 
-// import authImg from '../../assets/images/authPageImg.jpg';
-
 const AuthPage = () => {
   return (
     <div className='flex'>

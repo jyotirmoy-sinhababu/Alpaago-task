@@ -2,7 +2,11 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        fontStyle: ['Protest Riot', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 };
