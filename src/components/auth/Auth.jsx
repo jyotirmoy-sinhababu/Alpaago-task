@@ -10,16 +10,15 @@ const Auth = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   return (
-    <div>
-      <div>
+    <div className='flex flex-col gap-8 justify-center items-center '>
+      <div className='flex flex-col gap-8'>
         <Logo />
         {isLogin ? <Login /> : <SignUp />}
-      </div>
-      <div>
         <img src={dividerImg} alt='----o-----' />
       </div>
+
       <div className='flex'>
-        <div>
+        <div className='flex justify-center'>
           <p>
             {isLogin ? "Don't have an account?" : 'Already have an account?'}
           </p>
