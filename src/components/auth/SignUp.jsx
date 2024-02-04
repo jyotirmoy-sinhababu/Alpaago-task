@@ -6,20 +6,24 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <form>
-      <input type='text' placeholder='User Name' className='border-2' />
-      <input type='email' placeholder='User Email' className='border-2' />
-      <div>
+      <div className='flex flex-col'>
+        <input type='text' placeholder='User Name' className='border-2' />
+        <input type='email' placeholder='User Email' className='border-2' />
+      </div>
+
+      <div className='w-[320px] border-2 '>
         <input
-          type='password'
+          type={showPassword ? 'text' : 'password'}
           placeholder='User Password'
-          className='border-2'
+          className=''
         />
         <button
+          type='button'
           onClick={() => {
             setShowPassword(!showPassword);
           }}
         >
-          {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
+          {!showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
         </button>
       </div>
       <button>Sign Up</button>
