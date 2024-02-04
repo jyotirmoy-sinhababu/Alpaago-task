@@ -10,7 +10,7 @@ const Auth = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   return (
-    <div className='flex flex-col gap-8 justify-center items-center '>
+    <div className='flex flex-col gap-8 justify-center  '>
       <div className='flex flex-col gap-8'>
         <Logo />
         {isLogin ? <Login /> : <SignUp />}
