@@ -4,8 +4,12 @@ import TableComp from '../../components/tableComp/TableComp';
 const HomePage = () => {
   return (
     <div>
-      <NavBar />
-      <TableComp />
+      <div className='flex justify-center pt-[12px]'>
+        <NavBar />
+      </div>
+      <div className='flex pt-[109px] justify-center'>
+        <TableComp />
+      </div>
     </div>
   );
 };

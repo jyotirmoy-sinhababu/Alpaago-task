@@ -35,7 +35,7 @@ const SignUp = () => {
           placeholder='User Email'
           className='border-2 h-[55px] px-[10px]'
           onChange={(e) => {
-            setInputs({ ...inputs, email: e.target.value });
+            setInputs({ ...inputs, email: e.target.value }); 
           }}
         />
       </div>
