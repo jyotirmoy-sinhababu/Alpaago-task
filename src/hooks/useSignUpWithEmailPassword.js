@@ -5,11 +5,16 @@ import { setDoc } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
+import { useDispatch } from 'react-redux';
+import { login } from '../components/slice/AuthSlice';
+
 const useSignUpWithEmailPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+
+  const dispatch = useDispatch();
 
   const signUp = async (inputs) => {
     if (!inputs.email || !inputs.password || !inputs.userName) {
@@ -46,6 +51,7 @@ const useSignUpWithEmailPassword = () => {
         await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
         setIsLoading(false);
         localStorage.setItem('user-info', JSON.stringify(userDoc));
+        dispatch(login(userDoc));
       }
     } catch (error) {
       setIsLoading(false);
