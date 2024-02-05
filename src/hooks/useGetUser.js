@@ -1,14 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import {
-  collection,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  where,
-} from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../firebase/Firebase';
 
 const useGetUser = () => {
@@ -20,23 +13,12 @@ const useGetUser = () => {
     const getAllUsers = async () => {
       setIsLoading(true);
       try {
-        debugger;
-        const usersRef = collection(firestore, 'users');
-        const q = query(
-          usersRef,
-          where('uid', 'not-in', [authUser.uid]),
-          orderBy('uid'),
-          limit(5)
-        );
-
-        const querySnapshot = await getDocs(q);
         const users = [];
 
+        const querySnapshot = await getDocs(collection(firestore, 'users'));
         querySnapshot.forEach((doc) => {
-          console.log(doc);
-          users.push({ ...doc.data(), id: doc.id });
+          users.push({ ...doc.data() });
         });
-
         setAllUser(users);
       } catch (error) {
         console.log('error');
