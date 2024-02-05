@@ -19,6 +19,7 @@ const useLogin = () => {
         const docRef = doc(firestore, 'users', userCred.user.uid);
         const docSnap = await getDoc(docRef);
         localStorage.setItem('user-info', JSON.stringify(docSnap.data()));
+        console.log('ok');
       }
     } catch (error) {
       console.log(error);
