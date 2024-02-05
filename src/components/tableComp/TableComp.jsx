@@ -4,13 +4,16 @@ import { MdDelete } from 'react-icons/md';
 import { CiEdit } from 'react-icons/ci';
 
 import Loading from '../../components/loading/Loading';
-import Modal from '../../modal/Modal';
-import EditForm from '../editForm/EditForm';
 
 const TableComp = () => {
   const { isLoading, allUser } = useGetUser();
+  const [currentId, setCurrentId] = useState('');
+  const [isEditing, setIsEDiting] = useState(false);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [editedInputs, setEditedInputs] = useState({
+    userName: '',
+    email: '',
+  });
 
   if (isLoading) <Loading />;
   return (
@@ -38,33 +41,92 @@ const TableComp = () => {
                   className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'
                   key={user.uid}
                 >
-                  <td className='px-6 py-4'>{user.userName}</td>
-                  <td className='px-6 py-4'>{user.email}</td>
+                  <td className='px-6 py-4'>
+                    {isEditing && user?.uid === currentId ? (
+                      <input
+                        type='text'
+                        placeholder='Full Name'
+                        className='border-2 h-[35px] px-[10px]'
+                        value={editedInputs.userName}
+                        onChange={(e) => {
+                          setEditedInputs({
+                            ...editedInputs,
+                            userName: e.target.value,
+                          });
+                        }}
+                      />
+                    ) : (
+                      `${user?.userName}`
+                    )}
+                  </td>
+                  <td className='px-6 py-4'>
+                    {' '}
+                    {isEditing && user?.uid === currentId ? (
+                      <input
+                        type='text'
+                        placeholder='email'
+                        className='border-2 h-[35px] px-[10px]'
+                        value={editedInputs.email}
+                        onChange={(e) => {
+                          setEditedInputs({
+                            ...editedInputs,
+                            email: e.target.value,
+                          });
+                        }}
+                      />
+                    ) : (
+                      `${user?.email}`
+                    )}
+                  </td>
                   <td className='px-6 py-4 flex gap-[10px]'>
-                    <button
-                      className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-                      type='button'
-                      onClick={() => {
-                        setIsOpen(true);
-                      }}
-                    >
-                      <CiEdit />
-                    </button>
-                    <button>
-                      <MdDelete />
-                    </button>
+                    {isEditing && user?.uid === currentId ? (
+                      <div className='flex gap-3'>
+                        <button
+                          className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                          type='button'
+                          onClick={() => {
+                            setIsEDiting(false);
+                          }}
+                        >
+                          save
+                        </button>
+                        <button
+                          onClick={() => {
+                            setIsEDiting(false);
+                          }}
+                          className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                        >
+                          cancel
+                        </button>
+                      </div>
+                    ) : (
+                      <div className='flex gap-3'>
+                        <button
+                          className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                          type='button'
+                          onClick={() => {
+                            setCurrentId(user.uid);
+                            setIsEDiting(true);
+                          }}
+                        >
+                          <CiEdit />
+                        </button>
+                        <button className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+                          <MdDelete />
+                        </button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               );
             })
           ) : (
-            <p>No user found</p>
+            <div className='flex justify-center items-center w-[710px] '>
+              <p className=''>No user found</p>
+            </div>
           )}
         </tbody>
       </table>
-      <Modal isOpen={isOpen}>
-        <EditForm setIsOpen={setIsOpen} />
-      </Modal>
     </>
   );
 };
