@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 const EditedSlice = createSlice({
   name: 'editedData',
   initialState: {
@@ -12,4 +13,5 @@ const EditedSlice = createSlice({
 });
 
 export const { saveData } = EditedSlice.actions;
-export default EditedSlice;
+
+export default EditedSlice.reducer;

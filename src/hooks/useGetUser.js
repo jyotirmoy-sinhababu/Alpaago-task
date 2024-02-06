@@ -8,6 +8,7 @@ const useGetUser = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [allUser, setAllUser] = useState([]);
   const authUser = useSelector((state) => state.auth.user);
+
   const editUser = useSelector((state) => state.edit.editedData);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const useGetUser = () => {
     };
 
     if (authUser) getAllUsers();
-  }, [authUser, editUser]);
+  }, [authUser, editUser.length]);
 
   return { isLoading, allUser };
 };
