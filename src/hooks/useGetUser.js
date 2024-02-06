@@ -7,7 +7,6 @@ import { firestore } from '../firebase/Firebase';
 const useGetUser = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [allUser, setAllUser] = useState([]);
-  const [triggerUser, setTriggerUser] = useState(false);
 
   const authUser = useSelector((state) => state.auth.user);
 
@@ -32,9 +31,9 @@ const useGetUser = () => {
     };
 
     if (authUser) getAllUsers();
-  }, [authUser, editUser.length, triggerUser]);
+  }, [authUser, editUser.length]);
 
-  return { isLoading, allUser, setTriggerUser };
+  return { isLoading, allUser };
 };
 
 export default useGetUser;

@@ -10,7 +10,6 @@ import { firestore } from '../../firebase/Firebase';
 import { arrayRemove, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
 const TableRowComp = ({ user }) => {
-  console.log(user);
   const [currentId, setCurrentId] = useState('');
   const [isEditing, setIsEDiting] = useState(false);
 
@@ -18,8 +17,6 @@ const TableRowComp = ({ user }) => {
     userName: user.userName,
     email: user.email,
   });
-
-  const { setTriggerUser } = useGetUser();
 
   const handleDelete = async () => {
     if (!window.confirm('Are you sure you want to delete this post?')) return;
@@ -31,10 +28,13 @@ const TableRowComp = ({ user }) => {
       await updateDoc(userRef, {
         users: arrayRemove(user.uid),
       });
-      setTriggerUser(true);
     } catch (error) {
     } finally {
     }
+  };
+
+  const refreshPage = () => {
+    window.location.reload(false);
   };
 
   return (
@@ -117,6 +117,7 @@ const TableRowComp = ({ user }) => {
               className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               onClick={() => {
                 handleDelete();
+                refreshPage();
               }}
             >
               <MdDelete />
