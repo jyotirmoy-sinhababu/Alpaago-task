@@ -4,9 +4,9 @@ import TableComp from '../../components/tableComp/TableComp';
 
 const HomePage = () => {
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-center items-center bg-slate-600'>
       {' '}
-      <div className='flex flex-col gap-[65px] border-x-2 border-orange-950 h-[100vh]'>
+      <div className='flex flex-col gap-[65px] border-x-2 border-orange-950 h-[100vh] bg-slate-800'>
         <div className='flex flex-col justify-center p-[42px] items-center gap-5  '>
           <NavBar />
           <WeatherReport />
