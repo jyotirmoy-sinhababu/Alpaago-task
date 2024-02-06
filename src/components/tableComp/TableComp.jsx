@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import useGetUser from '../../hooks/useGetUser';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdOutlineSaveAlt, MdOutlineCancel } from 'react-icons/md';
 import { CiEdit } from 'react-icons/ci';
 
 import Loading from '../../components/loading/Loading';
+
+import useEditUserDtls from '../../hooks/useEditUserDtls';
 
 const TableComp = () => {
   const { isLoading, allUser } = useGetUser();
@@ -14,6 +16,8 @@ const TableComp = () => {
     userName: '',
     email: '',
   });
+
+  const { editProfile, isUpdating } = useEditUserDtls();
 
   if (isLoading) <Loading />;
   return (
@@ -82,27 +86,28 @@ const TableComp = () => {
                     {isEditing && user?.uid === currentId ? (
                       <div className='flex gap-3'>
                         <button
-                          className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                          className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 '
                           type='button'
                           onClick={() => {
                             setIsEDiting(false);
+                            editProfile(editedInputs, user);
                           }}
                         >
-                          save
+                          <MdOutlineSaveAlt />
                         </button>
                         <button
                           onClick={() => {
                             setIsEDiting(false);
                           }}
-                          className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                          className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 '
                         >
-                          cancel
+                          <MdOutlineCancel />
                         </button>
                       </div>
                     ) : (
                       <div className='flex gap-3'>
                         <button
-                          className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                          className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 '
                           type='button'
                           onClick={() => {
                             setCurrentId(user.uid);
@@ -111,7 +116,7 @@ const TableComp = () => {
                         >
                           <CiEdit />
                         </button>
-                        <button className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+                        <button className='block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
                           <MdDelete />
                         </button>
                       </div>
