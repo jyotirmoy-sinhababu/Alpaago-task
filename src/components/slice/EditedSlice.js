@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const EditedSlice = createSlice({
   name: 'editedData',
   initialState: {
-    editedData: '',
+    editedData: [],
   },
   reducers: {
     saveData: (state, action) => {

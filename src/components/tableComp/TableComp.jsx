@@ -25,13 +25,15 @@ const TableComp = () => {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {allUser.length > 0
-            ? allUser.map((user) => {
-                return <TableRowComp key={user.uid} user={user} />;
-              })
-            : null}
-        </tbody>
+        {allUser.length > 0
+          ? allUser.map((user) => {
+              return (
+                <tbody key={user.uid}>
+                  <TableRowComp user={user} />
+                </tbody>
+              );
+            })
+          : null}
       </table>
     </>
   );
